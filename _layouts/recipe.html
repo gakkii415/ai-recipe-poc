@@ -1,0 +1,61 @@
+---
+layout: default
+---
+<main class="recipe-page">
+  <a class="back-link" href="{{ '/' | relative_url }}#recipes">← レシピ一覧</a>
+
+  <article itemscope itemtype="https://schema.org/Recipe">
+    <header class="recipe-heading">
+      <div>
+        <p class="recipe-kicker">{{ page.category }} / {{ page.cuisine }}</p>
+        <h1 itemprop="name">{{ page.title }}</h1>
+        <p class="recipe-lead" itemprop="description">{{ page.description }}</p>
+      </div>
+      <dl class="recipe-facts">
+        <div><dt>準備</dt><dd>{{ page.prep_minutes }}分</dd></div>
+        <div><dt>加熱</dt><dd>{{ page.cook_minutes }}分</dd></div>
+        <div><dt>分量</dt><dd>{{ page.servings }}人分</dd></div>
+        <div><dt>難易度</dt><dd>{{ page.difficulty }}</dd></div>
+      </dl>
+    </header>
+
+    <div class="review-strip review-{{ page.review_status }}">
+      <span>CONTENT STATUS</span>
+      <strong>{{ page.review_status }}</strong>
+      <span>ID {{ page.id }}</span>
+      <span>BATCH {{ page.batch_id }}</span>
+    </div>
+
+    <div class="recipe-body">
+      <aside class="ingredients" aria-labelledby="ingredients-title">
+        <h2 id="ingredients-title">材料</h2>
+        <p>{{ page.servings }}人分</p>
+        <ul itemprop="recipeIngredient">
+          {% for ingredient in page.ingredients %}
+            <li>{{ ingredient }}</li>
+          {% endfor %}
+        </ul>
+      </aside>
+      <div class="method" itemprop="recipeInstructions">
+        {{ content }}
+      </div>
+    </div>
+  </article>
+</main>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Recipe",
+  "name": {{ page.title | jsonify }},
+  "description": {{ page.description | jsonify }},
+  "datePublished": {{ page.date | date_to_xmlschema | jsonify }},
+  "prepTime": "PT{{ page.prep_minutes }}M",
+  "cookTime": "PT{{ page.cook_minutes }}M",
+  "recipeYield": "{{ page.servings }}人分",
+  "recipeCategory": {{ page.category | jsonify }},
+  "recipeCuisine": {{ page.cuisine | jsonify }},
+  "recipeIngredient": {{ page.ingredients | jsonify }}
+}
+</script>
+

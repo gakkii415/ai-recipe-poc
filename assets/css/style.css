@@ -1,0 +1,153 @@
+:root {
+  --paper: #f3efe5;
+  --ink: #1e211c;
+  --muted: #696b62;
+  --line: #c9c4b8;
+  --tomato: #c94b35;
+  --leaf: #526c45;
+  --white: #fffdf8;
+  --max: 1180px;
+  --space: clamp(20px, 3vw, 40px);
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", system-ui, sans-serif;
+  line-height: 1.65;
+}
+a { color: inherit; text-decoration: none; }
+a:focus-visible, button:focus-visible, input:focus-visible { outline: 3px solid var(--tomato); outline-offset: 3px; }
+
+.site-header, .site-footer, .home, .recipe-page {
+  width: min(calc(100% - 32px), var(--max));
+  margin-inline: auto;
+}
+.site-header {
+  min-height: 82px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--ink);
+}
+.brand { display: inline-flex; align-items: center; gap: 12px; font-weight: 800; letter-spacing: .08em; }
+.brand-mark {
+  width: 36px; height: 36px; display: grid; place-items: center;
+  background: var(--tomato); color: var(--white); font: 700 13px/1 Georgia, serif;
+  border-radius: 50% 50% 45% 55%;
+}
+.site-nav { display: flex; gap: 24px; font-size: 14px; }
+.site-nav a:hover { text-decoration: underline; text-underline-offset: 4px; }
+
+.intro {
+  min-height: 390px;
+  padding: 72px 0 60px;
+  display: grid;
+  grid-template-columns: 1.5fr .7fr;
+  gap: var(--space);
+  align-items: end;
+  border-bottom: 1px solid var(--ink);
+}
+.section-label { margin: 0 0 18px; color: var(--tomato); font: 700 12px/1.2 ui-monospace, monospace; letter-spacing: .12em; }
+.intro h1, .recipe-heading h1 {
+  margin: 0;
+  font-family: "Yu Mincho", "Hiragino Mincho ProN", Georgia, serif;
+  font-weight: 600;
+  letter-spacing: -.04em;
+}
+.intro h1 { font-size: clamp(46px, 7vw, 90px); line-height: 1.12; }
+.intro-copy { max-width: 31em; margin: 0; color: var(--muted); font-size: 15px; }
+
+.latest { padding: 50px 0; border-bottom: 1px solid var(--ink); }
+.latest-grid { display: grid; grid-template-columns: 1.5fr .7fr; gap: var(--space); align-items: end; }
+.latest-category { color: var(--leaf); font-size: 13px; font-weight: 700; }
+.latest h2 { margin: 5px 0 12px; font: 600 clamp(30px, 4vw, 56px)/1.18 "Yu Mincho", Georgia, serif; }
+.latest h2 a { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 8px; }
+.latest p { max-width: 48em; }
+.latest dl, .recipe-facts { display: grid; grid-template-columns: repeat(3, 1fr); margin: 0; border-top: 1px solid var(--line); }
+.latest dl div, .recipe-facts div { padding-top: 12px; border-right: 1px solid var(--line); }
+.latest dl div:last-child, .recipe-facts div:last-child { border-right: 0; }
+dt { color: var(--muted); font-size: 11px; letter-spacing: .08em; }
+dd { margin: 4px 0 0; font-weight: 700; }
+
+.archive { padding: 68px 0 90px; }
+.archive-heading { display: flex; align-items: end; justify-content: space-between; gap: 20px; }
+.archive-heading h2 { margin: 0; font: 600 clamp(30px, 4vw, 48px)/1.2 "Yu Mincho", Georgia, serif; }
+#result-count { margin: 0; color: var(--muted); font: 13px/1 ui-monospace, monospace; }
+.filter-bar { margin-top: 32px; padding: 18px 0; display: grid; grid-template-columns: minmax(260px, .8fr) 1.4fr; gap: 24px; border-block: 1px solid var(--line); }
+.search-box { display: flex; align-items: center; gap: 12px; font-size: 12px; font-weight: 700; }
+.search-box input { width: 100%; border: 0; border-bottom: 1px solid var(--ink); background: transparent; padding: 10px 4px; color: var(--ink); font: inherit; border-radius: 0; }
+.category-filter { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 6px; }
+.category-filter button { border: 1px solid var(--line); background: transparent; color: var(--ink); min-height: 38px; padding: 8px 12px; cursor: pointer; }
+.category-filter button.is-active { background: var(--ink); color: var(--white); border-color: var(--ink); }
+.recipe-list { list-style: none; margin: 0; padding: 0; border-bottom: 1px solid var(--ink); }
+.recipe-row { border-top: 1px solid var(--line); }
+.recipe-row[hidden] { display: none; }
+.recipe-row a { min-height: 112px; display: grid; grid-template-columns: 48px minmax(0, 1fr) 120px 76px 24px; gap: 16px; align-items: center; }
+.recipe-row a:hover .recipe-main strong { color: var(--tomato); }
+.recipe-number { color: var(--muted); font: 12px ui-monospace, monospace; }
+.recipe-main { min-width: 0; display: grid; gap: 5px; }
+.recipe-main strong { font: 600 21px/1.35 "Yu Mincho", Georgia, serif; transition: color .15s ease; }
+.recipe-main > span { color: var(--muted); font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.recipe-category, .recipe-time { font-size: 12px; }
+.recipe-time { font-variant-numeric: tabular-nums; }
+.recipe-arrow { color: var(--tomato); }
+.empty-state { padding: 48px 0; border-bottom: 1px solid var(--ink); color: var(--muted); }
+
+.recipe-page { padding: 56px 0 100px; }
+.back-link { display: inline-block; margin-bottom: 50px; font-size: 13px; border-bottom: 1px solid var(--ink); }
+.recipe-heading { display: grid; grid-template-columns: 1.35fr .65fr; align-items: end; gap: var(--space); }
+.recipe-kicker { color: var(--tomato); font: 700 12px/1.2 ui-monospace, monospace; letter-spacing: .1em; }
+.recipe-heading h1 { font-size: clamp(42px, 6vw, 78px); line-height: 1.1; }
+.recipe-lead { max-width: 44em; color: var(--muted); }
+.recipe-facts { grid-template-columns: repeat(2, 1fr); gap: 18px 0; }
+.review-strip { margin-top: 54px; padding: 11px 14px; display: flex; flex-wrap: wrap; gap: 12px 28px; background: var(--ink); color: var(--white); font: 11px/1.4 ui-monospace, monospace; letter-spacing: .06em; }
+.review-reviewed { background: var(--leaf); }
+.recipe-body { margin-top: 60px; display: grid; grid-template-columns: .72fr 1.28fr; gap: clamp(40px, 8vw, 110px); align-items: start; }
+.ingredients { position: sticky; top: 24px; }
+.ingredients h2, .method h2 { margin: 0; font: 600 28px/1.2 "Yu Mincho", Georgia, serif; }
+.ingredients > p { color: var(--muted); font-size: 12px; }
+.ingredients ul { list-style: none; margin: 24px 0 0; padding: 0; border-top: 1px solid var(--ink); }
+.ingredients li { padding: 13px 0; border-bottom: 1px solid var(--line); }
+.method { font-size: 16px; }
+.method h2 { margin-bottom: 24px; }
+.method h3 { margin: 38px 0 10px; font-size: 18px; }
+.method ol { padding-left: 0; list-style: none; counter-reset: step; }
+.method ol li { position: relative; min-height: 52px; padding: 2px 0 22px 54px; counter-increment: step; }
+.method ol li::before { content: counter(step, decimal-leading-zero); position: absolute; left: 0; top: 0; color: var(--tomato); font: 700 13px ui-monospace, monospace; }
+.method blockquote { margin: 36px 0 0; padding: 20px 22px; border-left: 3px solid var(--leaf); background: rgba(255,255,255,.35); }
+.method blockquote p { margin: 0; }
+
+.site-footer { padding: 28px 0 48px; display: flex; justify-content: space-between; gap: 24px; border-top: 1px solid var(--ink); color: var(--muted); font-size: 12px; }
+
+@media (max-width: 760px) {
+  .site-header { min-height: 68px; }
+  .site-nav a:not(:first-child) { display: none; }
+  .intro { min-height: 330px; padding: 48px 0 34px; grid-template-columns: 1fr; align-content: space-between; }
+  .intro h1 { font-size: clamp(42px, 13vw, 64px); }
+  .latest-grid, .recipe-heading, .recipe-body { grid-template-columns: 1fr; }
+  .latest dl { margin-top: 18px; }
+  .filter-bar { grid-template-columns: 1fr; }
+  .category-filter { justify-content: flex-start; flex-wrap: nowrap; overflow-x: auto; padding-bottom: 4px; }
+  .category-filter button { white-space: nowrap; }
+  .recipe-row a { min-height: 105px; grid-template-columns: 30px minmax(0,1fr) 52px 18px; gap: 10px; }
+  .recipe-category { display: none; }
+  .recipe-main strong { font-size: 18px; }
+  .recipe-main > span { font-size: 12px; }
+  .recipe-page { padding-top: 34px; }
+  .back-link { margin-bottom: 36px; }
+  .recipe-facts { margin-top: 24px; }
+  .review-strip { margin-top: 36px; }
+  .recipe-body { margin-top: 42px; gap: 48px; }
+  .ingredients { position: static; }
+  .site-footer { display: block; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .recipe-main strong { transition: none; }
+}
+

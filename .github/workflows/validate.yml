@@ -1,0 +1,24 @@
+name: Validate recipe posts
+
+on:
+  push:
+    paths:
+      - "_posts/**"
+      - "scripts/validate_posts.rb"
+      - ".github/workflows/validate.yml"
+  pull_request:
+    paths:
+      - "_posts/**"
+      - "scripts/validate_posts.rb"
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate front matter and recipe structure
+        run: ruby scripts/validate_posts.rb
+

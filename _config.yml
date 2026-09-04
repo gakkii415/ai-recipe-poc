@@ -1,0 +1,28 @@
+title: KITCHEN INDEX
+description: AIによる大量コンテンツ投稿を検証するレシピサイトPoC
+url: https://gakkii415.github.io
+baseurl: /ai-recipe-poc
+lang: ja
+timezone: Asia/Tokyo
+permalink: /recipes/:title/
+future: true
+
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: recipe
+
+exclude:
+  - AGENTS.md
+  - CONTENT.md
+  - DESIGN.md
+  - DESIGN_REVIEW.md
+  - FEATURES.md
+  - WORKFLOW.md
+  - POSTING_GUIDE.md
+  - README.md
+  - scripts
+  - templates
+

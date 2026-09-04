@@ -1,0 +1,35 @@
+---
+id: "recipe-0007"
+title: "料理名"
+description: "料理の特徴を60〜100文字で具体的に説明"
+date: 2026-09-05 09:00:00 +0900
+category: "主菜"
+cuisine: "家庭料理"
+tags: ["時短", "フライパン"]
+prep_minutes: 10
+cook_minutes: 15
+servings: 2
+difficulty: "かんたん"
+ingredients:
+  - "材料A 200g"
+  - "材料B 大さじ1"
+author: "AI Recipe PoC"
+generator: "使用したAI名"
+prompt_version: "v1"
+batch_id: "batch-20260905-a"
+review_status: "unreviewed"
+published: true
+---
+
+## 作り方
+
+1. 最初の工程を、火加減や目安時間を含めて具体的に書く。
+2. 次の工程を書く。
+3. 完成の判断基準を書く。
+
+## コツ
+
+失敗を避けるための短い補足を書く。
+
+> アレルギー、加熱状態、保存状態は食べる人自身でも確認してください。
+
