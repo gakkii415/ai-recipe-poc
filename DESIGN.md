@@ -357,7 +357,7 @@ Yesの場合、装飾を追加する前に、構成、情報階層、コンテ�
 - Reference products / source URLs: Good Food Recipes (https://www.bbcgoodfood.com/recipes)、Food Network Recipes (https://www.foodnetwork.com/recipes)。2026-09-05に実画面を確認。
 - Selected reference dimensions / what to borrow: Good Foodの検索を上位に置く構造、大きな料理ビジュアルとカテゴリによる発見導線。Food Networkの明確な見出し、カテゴリショートカット、主領域と補助領域の非対称構成。今回は検索・カテゴリ・タイトル階層へ翻訳する。
 - What not to copy / avoid: 広告、評価数、Premium表示、多数のカルーセル、写真がなければ成立しないカード群、マーケティング用の巨大Heroは採用しない。
-- Structural direction: 導入→最新1件→検索可能な索引リスト。詳細はDesktopで材料を左に固定し手順を右、Mobileでは材料→手順の調理順に再配置。
+- Structural direction: 導入直後に検索可能な全記事索引を置く。詳細はDesktopで材料を左に固定し手順を右、Mobileでは材料→手順の調理順に再配置。
 - Typography / color / spacing / shape direction: 和文明朝を料理名、ゴシックを操作・本文、等幅を監査情報に限定。生成紙色、墨色、トマト赤、葉色。面をカード化せず罫線で関係を示す。
 - Motion / responsive direction: 検索結果は即時更新、その他の動きは最小限。Mobileでは補助ナビとカテゴリ列を圧縮し、タッチ領域を維持する。
 - Durable design decisions: 固有表現は「編集索引の行」と「CONTENT STATUS帯」。画像の有無に依存せず100記事まで同じ視覚文法で増やせることを優先する。
