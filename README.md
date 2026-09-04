@@ -1,8 +1,8 @@
 # AI Recipe PoC
 
-AIが30〜100件のテキストコンテンツをGitHub経由で一括投稿できるか検証する、GitHub Pages製のレシピサイトです。
+AIが数百件規模のテキストコンテンツをGitHub経由で一括投稿できるか検証する、GitHub Pages製のレシピサイトです。
 
-- 公開サイト: https://gakkii415.github.io/ai-recipe-poc/?v=3
+- 公開サイト: https://gakkii415.github.io/ai-recipe-poc/?v=4
 - 投稿仕様: https://gakkii415.github.io/ai-recipe-poc/POSTING_GUIDE/
 - JSON API: https://gakkii415.github.io/ai-recipe-poc/api/recipes.json
 
