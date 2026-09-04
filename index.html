@@ -12,25 +12,6 @@ description: 材料、料理名、カテゴリからレシピを検索できま�
     <p class="intro-copy">料理名、材料、カテゴリから絞り込み。AIが追加した記事は、公開状態と生成バッチまで追跡できます。</p>
   </section>
 
-  {% assign latest = site.posts | first %}
-  {% if latest %}
-  <section class="latest" aria-labelledby="latest-title">
-    <p class="section-label">LATEST ENTRY</p>
-    <div class="latest-grid">
-      <div>
-        <p class="latest-category">{{ latest.category }} / {{ latest.cuisine }}</p>
-        <h2 id="latest-title"><a href="{{ latest.url | relative_url }}">{{ latest.title }}</a></h2>
-        <p>{{ latest.description }}</p>
-      </div>
-      <dl>
-        <div><dt>合計</dt><dd>{{ latest.prep_minutes | plus: latest.cook_minutes }}分</dd></div>
-        <div><dt>分量</dt><dd>{{ latest.servings }}人分</dd></div>
-        <div><dt>状態</dt><dd>{{ latest.review_status }}</dd></div>
-      </dl>
-    </div>
-  </section>
-  {% endif %}
-
   <section id="recipes" class="archive" aria-labelledby="archive-title">
     <div class="archive-heading">
       <div>
@@ -74,4 +55,3 @@ description: 材料、料理名、カテゴリからレシピを検索できま�
   </section>
 </main>
 <script src="{{ '/assets/js/search.js' | relative_url }}" defer></script>
-
