@@ -350,14 +350,14 @@ Yesの場合、装飾を追加する前に、構成、情報階層、コンテ�
 
 ## Project Direction
 
-- Product / users / primary task:
-- Context of use / target devices:
-- Desired impression:
-- Information density / hierarchy:
-- Reference products / source URLs:
-- Selected reference dimensions / what to borrow:
-- What not to copy / avoid:
-- Structural direction:
-- Typography / color / spacing / shape direction:
-- Motion / responsive direction:
-- Durable design decisions:
+- Product / users / primary task: AI大量投稿PoCのレシピアーカイブ。読者の主要タスクは料理名・材料・カテゴリから候補を探し、材料と手順を読むこと。
+- Context of use / target devices: 献立検討はDesktop / Mobile、調理中は主にMobile。短時間の検索と、手が塞がった状態での縦読みを想定する。
+- Desired impression: 広告メディアではなく、料理編集部の索引帳。食品写真がなくても内容と所要時間が主役になる静かな編集デザイン。
+- Information density / hierarchy: 一覧は中〜高密度。料理名を最優先、説明・カテゴリ・合計時間を次点。詳細は材料と手順を明確に分離する。
+- Reference products / source URLs: Good Food Recipes (https://www.bbcgoodfood.com/recipes)、Food Network Recipes (https://www.foodnetwork.com/recipes)。2026-09-05に実画面を確認。
+- Selected reference dimensions / what to borrow: Good Foodの検索を上位に置く構造、大きな料理ビジュアルとカテゴリによる発見導線。Food Networkの明確な見出し、カテゴリショートカット、主領域と補助領域の非対称構成。今回は検索・カテゴリ・タイトル階層へ翻訳する。
+- What not to copy / avoid: 広告、評価数、Premium表示、多数のカルーセル、写真がなければ成立しないカード群、マーケティング用の巨大Heroは採用しない。
+- Structural direction: 導入→最新1件→検索可能な索引リスト。詳細はDesktopで材料を左に固定し手順を右、Mobileでは材料→手順の調理順に再配置。
+- Typography / color / spacing / shape direction: 和文明朝を料理名、ゴシックを操作・本文、等幅を監査情報に限定。生成紙色、墨色、トマト赤、葉色。面をカード化せず罫線で関係を示す。
+- Motion / responsive direction: 検索結果は即時更新、その他の動きは最小限。Mobileでは補助ナビとカテゴリ列を圧縮し、タッチ領域を維持する。
+- Durable design decisions: 固有表現は「編集索引の行」と「CONTENT STATUS帯」。画像の有無に依存せず100記事まで同じ視覚文法で増やせることを優先する。
