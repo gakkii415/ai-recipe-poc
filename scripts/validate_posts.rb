@@ -5,7 +5,7 @@ require "yaml"
 require "date"
 
 REQUIRED = %w[
-  id title description date category cuisine tags prep_minutes cook_minutes
+  content_id title description date category cuisine tags prep_minutes cook_minutes
   servings difficulty ingredients author generator prompt_version batch_id
   review_status published
 ].freeze
@@ -34,9 +34,9 @@ files.each do |path|
   missing = REQUIRED.reject { |key| data.key?(key) && !data[key].nil? }
   errors << "#{path}: 必須項目不足: #{missing.join(', ')}" unless missing.empty?
 
-  id = data["id"].to_s
-  errors << "#{path}: id が重複しています (#{id})" if ids.key?(id)
-  ids[id] = path
+  content_id = data["content_id"].to_s
+  errors << "#{path}: content_id が重複しています (#{content_id})" if ids.key?(content_id)
+  ids[content_id] = path
 
   errors << "#{path}: ファイル名は YYYY-MM-DD-slug.md にしてください" unless File.basename(path).match?(/\A\d{4}-\d{2}-\d{2}-[a-z0-9-]+\.md\z/)
   errors << "#{path}: ingredients は2件以上の配列にしてください" unless data["ingredients"].is_a?(Array) && data["ingredients"].length >= 2
@@ -56,4 +56,3 @@ if errors.any?
 end
 
 puts "Validated #{files.length} recipe post(s)."
-

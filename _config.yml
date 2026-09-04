@@ -21,8 +21,6 @@ exclude:
   - DESIGN_REVIEW.md
   - FEATURES.md
   - WORKFLOW.md
-  - POSTING_GUIDE.md
   - README.md
   - scripts
   - templates
-

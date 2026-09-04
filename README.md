@@ -12,7 +12,7 @@ AIが30〜100件のテキストコンテンツをGitHub経由で一括投稿で�
 
 ```yaml
 ---
-id: "recipe-0007"
+content_id: "recipe-0007"
 title: "料理名"
 description: "短い説明"
 date: 2026-09-05 09:00:00 +0900
@@ -42,4 +42,3 @@ ruby scripts/validate_posts.rb
 ```
 
 push / pull request時にもGitHub Actionsで同じ検証が実行されます。GitHub外のAIに書き込み権限を渡す場合は、最小権限のGitHub Appまたはfine-grained tokenを使い、認証情報をリポジトリへ保存しないでください。
-

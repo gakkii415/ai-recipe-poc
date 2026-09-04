@@ -22,7 +22,7 @@ layout: default
     <div class="review-strip review-{{ page.review_status }}">
       <span>CONTENT STATUS</span>
       <strong>{{ page.review_status }}</strong>
-      <span>ID {{ page.id }}</span>
+      <span>ID {{ page.content_id }}</span>
       <span>BATCH {{ page.batch_id }}</span>
     </div>
 
@@ -58,4 +58,3 @@ layout: default
   "recipeIngredient": {{ page.ingredients | jsonify }}
 }
 </script>
-

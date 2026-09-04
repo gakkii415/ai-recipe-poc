@@ -23,7 +23,7 @@ _posts/YYYY-MM-DD-english-slug.md
 ## AIへ渡す投稿ルール
 
 1. 雛形のキーを削除しない。
-2. `id` はリポジトリ内で一意にする。
+2. `content_id` はリポジトリ内で一意にする。
 3. 同じ生成単位には同じ `batch_id` を付ける。
 4. 人が確認するまでは `review_status: "unreviewed"` とする。
 5. 材料は `材料名 分量` の配列、本文は `## 作り方` から始める。
@@ -38,4 +38,3 @@ GitHubへpushすると検証Actionが必須項目、型、ID重複を確認し�
 全公開記事の構造化一覧は [`/api/recipes.json`]({{ '/api/recipes.json' | relative_url }}) から取得できます。
 
 </main>
-
