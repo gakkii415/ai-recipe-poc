@@ -6,7 +6,7 @@ lang: ja
 timezone: Asia/Tokyo
 permalink: /recipes/:title/
 future: true
-version: v1
+version: v2
 
 defaults:
   - scope:
