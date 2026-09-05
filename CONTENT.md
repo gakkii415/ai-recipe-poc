@@ -49,11 +49,11 @@
 ## Project Content Maturity
 
 - Content value / audience / use context: 読者には短時間で探して調理できるレシピ、運用者には大量生成の品質と由来を追跡できる投稿単位を提供する。
-- Content types / structure / quality bar: YAML front matterに検索・表示・監査項目、Markdown本文に作り方・コツ・安全注記。材料は分量付き配列、工程は判断基準が分かる具体文にする。
-- Current maturity / coverage / depth: ごはん、主菜、副菜、麺、デザート、汁物の6サンプルを収録。大量投稿前の型と表示検証に十分な範囲。
+- Content types / structure / quality bar: YAML front matterに検索・表示・監査項目、Markdown本文に作り方・コツ・安全注記。材料は分量付き配列、工程は時間・火加減・完成判断が分かる具体文にする。
+- Current maturity / coverage / depth: 既存41記事に、生産ラインv2の試験50記事を追加した計91記事。5記事単位の独立生成、10記事単位の別AIレビュー、不合格のみ修正する工程を検証済み。
 - Core content set / completion criteria: 各カテゴリを横断する実用サンプル、投稿雛形、AI向け投稿仕様、レビュー状態が揃い、一覧から個別レシピまで読めること。
-- Next target state: 別AIが30〜100記事を生成し、カテゴリ偏り、重複、所要時間・材料・工程の整合性を評価できる状態。
-- Expansion Set: サンプル6記事、投稿雛形、公開投稿ガイド、機械向けJSON一覧。
-- Deferred or rejected areas / reasons: 写真、栄養値、効能、評価、架空の人気指標は根拠がないため掲載しない。大量記事そのものは次のPoCバッチで追加する。
-- Sources / freshness / maintenance: 初期記事はAI生成サンプルでreview_status=unreviewed。食物アレルギー、肉の加熱、乳児とはちみつ等の安全注記を含め、公開運用では人の確認を前提とする。
-- Durable content decisions: 1記事1ファイル、一意ID、batch_id、generator、prompt_versionを必須とし、生成量だけでなく検証可能性を保持する。
+- Next target state: 今回の合格率・修正理由・処理量を基準に100件規模へ拡張し、重複検査と人間の抜き取り評価を定量化する。
+- Expansion Set: 生産ラインv2試験50記事、投稿雛形、公開投稿ガイド、機械向けJSON一覧、機械検査。
+- Deferred or rejected areas / reasons: 写真、栄養値、効能、評価、架空の人気指標は根拠がないため掲載しない。AIレビュー済みでも人間が確認するまで review_status は unreviewed とする。
+- Sources / freshness / maintenance: 記事はAI生成であり、食物アレルギー、肉・魚介・卵の加熱、乳児とはちみつ等の安全注記を含める。公開運用では人の確認を前提とする。
+- Durable content decisions: 1記事1ファイル、一意ID、batch_id、generator、prompt_versionを必須とする。1生成タスクは最大5記事、レビューは別コンテキストで最大10記事、不合格記事だけを修正する。

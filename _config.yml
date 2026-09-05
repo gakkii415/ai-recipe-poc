@@ -6,7 +6,7 @@ lang: ja
 timezone: Asia/Tokyo
 permalink: /recipes/:title/
 future: true
-version: v3
+version: v5
 
 defaults:
   - scope:
@@ -21,6 +21,7 @@ exclude:
   - DESIGN.md
   - DESIGN_REVIEW.md
   - FEATURES.md
+  - PIPELINE.md
   - WORKFLOW.md
   - README.md
   - scripts
