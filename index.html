@@ -3,55 +3,78 @@ layout: default
 title: レシピを探す
 description: 材料、料理名、カテゴリからレシピを検索できます。
 ---
-<main class="home">
-  <section class="intro">
-    <div>
-      <p class="section-label">RECIPE ARCHIVE / {{ site.posts | size }} ENTRIES</p>
-      <h1>今日つくれるものを、<br>まっすぐ探す。</h1>
+<main id="main-content" class="home">
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="eyebrow">
+      <span class="eyebrow-dot" aria-hidden="true"></span>
+      {{ site.posts | size }} RECIPES
     </div>
-    <p class="intro-copy">料理名、材料、カテゴリから絞り込み。AIが追加した記事は、公開状態と生成バッチまで追跡できます。</p>
+    <h1 id="hero-title">迷わず選べる、<br>毎日のレシピ。</h1>
+    <p>料理名や材料から、いま作りたい一皿をすぐに探せます。</p>
+    <a class="hero-action" href="#recipes">
+      レシピを探す
+      <svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+    </a>
   </section>
 
   <section id="recipes" class="archive" aria-labelledby="archive-title">
     <div class="archive-heading">
       <div>
-        <p class="section-label">ALL RECIPES</p>
-        <h2 id="archive-title">レシピ一覧</h2>
+        <p class="section-label">RECIPE COLLECTION</p>
+        <h2 id="archive-title">すべてのレシピ</h2>
       </div>
-      <p id="result-count" aria-live="polite">{{ site.posts | size }}件</p>
+      <p id="result-count" class="result-count" aria-live="polite">{{ site.posts | size }}件</p>
     </div>
 
-    <div class="filter-bar">
-      <label class="search-box">
-        <span>検索</span>
-        <input id="recipe-search" type="search" placeholder="料理名、材料、タグ" autocomplete="off">
+    <div class="filter-card">
+      <label class="search-box" for="recipe-search">
+        <svg viewBox="0 0 24 24" width="19" height="19" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.8-3.8"/></svg>
+        <span class="sr-only">レシピを検索</span>
+        <input id="recipe-search" type="search" placeholder="料理名、材料、タグで検索" autocomplete="off">
+        <button class="search-clear" id="search-clear" type="button" aria-label="検索語を消去" hidden>
+          <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="m18 6-12 12M6 6l12 12"/></svg>
+        </button>
       </label>
       <div class="category-filter" role="group" aria-label="カテゴリで絞り込み">
-        <button class="is-active" type="button" data-category="all">すべて</button>
+        <button class="is-active" type="button" data-category="all" aria-pressed="true">すべて</button>
         {% assign categories = site.posts | map: 'category' | uniq | sort %}
         {% for category in categories %}
-          <button type="button" data-category="{{ category | escape }}">{{ category }}</button>
+          <button type="button" data-category="{{ category | escape }}" aria-pressed="false">{{ category }}</button>
         {% endfor %}
       </div>
     </div>
 
-    <ol class="recipe-list" id="recipe-list">
+    <ol class="recipe-grid" id="recipe-list">
       {% for post in site.posts %}
-      <li class="recipe-row" data-category="{{ post.category | escape }}" data-search="{{ post.title | append: ' ' | append: post.description | append: ' ' | append: post.ingredients | append: ' ' | append: post.tags | downcase | escape }}">
+      <li class="recipe-card" data-category="{{ post.category | escape }}" data-search="{{ post.title | append: ' ' | append: post.description | append: ' ' | append: post.ingredients | append: ' ' | append: post.tags | downcase | escape }}">
         <a href="{{ post.url | relative_url }}">
-          <span class="recipe-number">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span>
-          <span class="recipe-main">
-            <strong>{{ post.title }}</strong>
-            <span>{{ post.description }}</span>
-          </span>
-          <span class="recipe-category">{{ post.category }}</span>
-          <span class="recipe-time">{{ post.prep_minutes | plus: post.cook_minutes }}分</span>
-          <span class="recipe-arrow" aria-hidden="true">↗</span>
+          <div class="recipe-card__top">
+            <span class="badge">{{ post.category }}</span>
+            <span class="recipe-index">{{ forloop.index }}</span>
+          </div>
+          <div class="recipe-card__content">
+            <h3>{{ post.title }}</h3>
+            <p>{{ post.description }}</p>
+          </div>
+          <div class="recipe-card__footer">
+            <span>
+              <svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+              {{ post.prep_minutes | plus: post.cook_minutes }}分
+            </span>
+            <span>{{ post.cuisine }}</span>
+            <svg class="card-arrow" viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </div>
         </a>
       </li>
       {% endfor %}
     </ol>
-    <p class="empty-state" id="empty-state" hidden>条件に一致するレシピがありません。</p>
+    <div class="empty-state" id="empty-state" hidden>
+      <span class="empty-state__icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="22" height="22"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.8-3.8"/></svg>
+      </span>
+      <h3>レシピが見つかりません</h3>
+      <p>検索語を変えるか、別のカテゴリを選んでください。</p>
+    </div>
   </section>
 </main>
 <script src="{{ '/assets/js/search.js' | relative_url }}" defer></script>
