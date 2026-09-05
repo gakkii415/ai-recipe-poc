@@ -63,13 +63,15 @@ const schema = {
           <h1 class="font-serif-jp mt-5 text-4xl font-semibold leading-[1.15] tracking-[-0.045em] sm:text-5xl lg:text-6xl">{recipe.data.title}</h1>
           <p class="mt-5 max-w-2xl text-base leading-7 text-muted-foreground">{recipe.data.description}</p>
         </div>
-        <Card className="grid grid-cols-2 gap-0 overflow-hidden py-0">
-          {facts.map(({ label, value, unit, icon: Icon }, index) => (
-            <div class:list={["min-h-24 p-4", index % 2 === 0 && "border-r", index < 2 && "border-b"]}>
-              <dt class="flex items-center gap-1.5 text-xs text-muted-foreground"><Icon size={15} />{label}</dt>
-              <dd class="mt-2 text-xl font-semibold">{value}<small class="ml-1 text-xs font-normal text-muted-foreground">{unit}</small></dd>
-            </div>
-          ))}
+        <Card className="overflow-hidden py-0">
+          <dl class="grid grid-cols-2 gap-0">
+            {facts.map(({ label, value, unit, icon: Icon }, index) => (
+              <div class:list={["min-h-24 p-4", index % 2 === 0 && "border-r", index < 2 && "border-b"]}>
+                <dt class="flex items-center gap-1.5 text-xs text-muted-foreground"><Icon size={15} />{label}</dt>
+                <dd class="mt-2 text-xl font-semibold">{value}<small class="ml-1 text-xs font-normal text-muted-foreground">{unit}</small></dd>
+              </div>
+            ))}
+          </dl>
         </Card>
       </header>
 

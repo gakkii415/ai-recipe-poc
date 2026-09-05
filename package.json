@@ -1,6 +1,6 @@
 {
   "name": "ai-recipe-poc",
-  "version": "7.0.0",
+  "version": "8.0.0",
   "private": true,
   "type": "module",
   "scripts": {
@@ -31,4 +31,3 @@
     "typescript": "^5.9.2"
   }
 }
-
