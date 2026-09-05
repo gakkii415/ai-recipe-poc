@@ -1,0 +1,27 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro"
+---
+<BaseLayout title="AI投稿仕様" description="AIがGitHub経由でレシピ記事を追加するための仕様。">
+  <main id="main-content" class="mx-auto max-w-3xl px-4 py-16 sm:px-6 sm:py-20">
+    <p class="text-xs font-semibold tracking-[0.16em] text-primary">CONTENT PIPELINE</p>
+    <h1 class="mt-3 text-4xl font-bold tracking-tight">AI投稿仕様</h1>
+    <div class="recipe-prose mt-10">
+      <p>このサイトは、<code>_posts</code> にMarkdownファイルを追加すると自動公開されます。投稿単位は <strong>1記事＝1ファイル</strong> です。</p>
+      <h2>推奨フォーマット</h2>
+      <p>本文はMarkdown、検索・表示・検証に使う値は先頭のYAML front matterへ分けます。生HTMLは使用しません。</p>
+      <pre><code>_posts/YYYY-MM-DD-english-slug.md</code></pre>
+      <h2>AIへ渡す投稿ルール</h2>
+      <ol>
+        <li>雛形のキーを削除しない。</li>
+        <li><code>content_id</code> はリポジトリ内で一意にする。</li>
+        <li>同じ生成単位には同じ <code>batch_id</code> を付ける。</li>
+        <li>人が確認するまでは <code>review_status: "unreviewed"</code> とする。</li>
+        <li>材料は「材料名 分量」の配列、本文は「作り方」から始める。</li>
+      </ol>
+      <h2>公開まで</h2>
+      <p>GitHubへpushすると検証Actionが必須項目、型、ID重複を確認します。通過後、Astroが一覧・個別ページ・JSON APIを静的生成します。</p>
+    </div>
+  </main>
+</BaseLayout>
+
+

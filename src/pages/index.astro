@@ -1,0 +1,47 @@
+---
+import { getCollection } from "astro:content"
+import { ArrowDown } from "lucide-react"
+
+import { RecipeExplorer, type RecipeSummary } from "@/components/RecipeExplorer"
+import BaseLayout from "@/layouts/BaseLayout.astro"
+import { recipeUrl, sortRecipes } from "@/lib/recipes"
+
+const recipes = sortRecipes((await getCollection("recipes")).filter((recipe) => recipe.data.published))
+const summaries: RecipeSummary[] = recipes.map((recipe) => ({
+  title: recipe.data.title,
+  description: recipe.data.description,
+  category: recipe.data.category,
+  cuisine: recipe.data.cuisine,
+  tags: recipe.data.tags,
+  ingredients: recipe.data.ingredients,
+  totalMinutes: recipe.data.prep_minutes + recipe.data.cook_minutes,
+  url: recipeUrl(recipe),
+}))
+---
+<BaseLayout title="レシピを探す" description="材料、料理名、カテゴリからレシピを検索できます。">
+  <main id="main-content">
+    <section class="border-b">
+      <div class="mx-auto flex min-h-[330px] max-w-6xl flex-col items-start justify-center px-4 py-16 sm:px-6 sm:py-20">
+        <p class="flex items-center gap-2 text-xs font-semibold tracking-[0.16em] text-primary">
+          <span class="size-1.5 rounded-full bg-primary ring-4 ring-primary/10"></span>
+          {recipes.length} RECIPES
+        </p>
+        <h1 class="font-serif-jp mt-5 max-w-3xl text-4xl font-semibold leading-[1.14] tracking-[-0.045em] sm:text-5xl lg:text-6xl">
+          迷わず選べる、<br />毎日のレシピ。
+        </h1>
+        <p class="mt-5 max-w-lg text-base leading-7 text-muted-foreground">
+          料理名や材料から、いま作りたい一皿をすぐに探せます。
+        </p>
+        <a href="#recipes" class="mt-8 inline-flex h-10 items-center gap-2 rounded-md bg-foreground px-4 text-sm font-medium text-background shadow-xs hover:bg-foreground/90">
+          レシピを探す <ArrowDown size={16} />
+        </a>
+      </div>
+    </section>
+
+    <section id="recipes" class="mx-auto max-w-6xl scroll-mt-20 px-4 py-14 sm:px-6 sm:py-18" aria-labelledby="recipes-title">
+      <p class="text-xs font-semibold tracking-[0.16em] text-primary">RECIPE COLLECTION</p>
+      <h2 id="recipes-title" class="font-serif-jp mt-2 text-3xl font-semibold tracking-tight sm:text-4xl">すべてのレシピ</h2>
+      <RecipeExplorer recipes={summaries} client:load />
+    </section>
+  </main>
+</BaseLayout>

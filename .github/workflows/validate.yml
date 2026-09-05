@@ -1,26 +1,9 @@
-name: Validate and build recipe site
+name: Validate recipe platform
 
 on:
   push:
-    paths:
-      - "_posts/**"
-      - "_layouts/**"
-      - "assets/**"
-      - "*.html"
-      - "POSTING_GUIDE.md"
-      - "scripts/validate_posts.rb"
-      - "_config.yml"
-      - ".github/workflows/validate.yml"
+    branches: ["main"]
   pull_request:
-    paths:
-      - "_posts/**"
-      - "_layouts/**"
-      - "assets/**"
-      - "*.html"
-      - "POSTING_GUIDE.md"
-      - "scripts/validate_posts.rb"
-      - "_config.yml"
-      - ".github/workflows/validate.yml"
 
 permissions:
   contents: read
@@ -30,10 +13,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Validate front matter and recipe structure
-        run: ruby scripts/validate_posts.rb
-      - name: Build GitHub Pages site
-        uses: actions/jekyll-build-pages@v1
+      - uses: actions/setup-node@v4
         with:
-          source: ./
-          destination: ./_site
+          node-version: 22
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Validate recipe content
+        run: ruby scripts/validate_posts.rb
+      - name: Type-check and build 94 static pages
+        env:
+          ASTRO_TELEMETRY_DISABLED: 1
+        run: npm run build

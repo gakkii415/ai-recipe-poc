@@ -48,7 +48,7 @@
 
 - Product / users / core outcome: AIコンテンツ生成者がGitHubへ記事ファイルを追加するだけで、読者向けレシピ一覧・個別ページ・機械向けJSONへ公開できるPoC。
 - Current maturity: コア完成。1記事1ファイル、Pages公開、検索・カテゴリ絞り込み、構造化API、投稿検証、生成履歴メタデータを実装済み。
-- Core feature set / completion criteria: `_posts` への追加→GitHub Actions検証→Jekyllビルド→一覧・詳細・API反映が成立し、30〜100記事でも同じ操作で処理できること。
+- Core feature set / completion criteria: `_posts` への追加→GitHub Actions検証→Astro静的ビルド→一覧・詳細・API反映が成立し、30〜100記事でも同じ操作で処理できること。
 - Next target state: 別AIから30〜100記事を1バッチで投入し、検証通過率、公開成功率、重複ID、表示・検索性能を計測する。
 - Expansion Set: キーワード検索、カテゴリ絞り込み、空結果、JSON API、review_status / batch_id / generator / prompt_versionの監査項目。
 - Deferred or rejected items / reasons: 画像生成、DB、ログイン、管理画面は投稿パイプライン検証に不要なため保留。生HTML投稿と単一巨大JSONは検証・競合・復元性が弱いため見送り。
