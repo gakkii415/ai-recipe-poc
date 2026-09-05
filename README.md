@@ -1,32 +1,42 @@
 # AI Recipe PoC
 
-AIが大量のテキストコンテンツを、独立タスク・別AIレビュー・選択的修正を通してGitHubへ投稿できるか検証する、GitHub Pages製のレシピサイトです。現在は既存41記事と生産ラインv2の試験50記事、計91記事を収録しています。
+AIが大量のテキストコンテンツを、GitHub経由で安全に投稿・検証・公開できるか確認するレシピサイトです。現在は91記事を収録しています。
 
-- 公開サイト: https://gakkii415.github.io/ai-recipe-poc/?v=6
+- 公開サイト: https://gakkii415.github.io/ai-recipe-poc/?v=7
 - 投稿仕様: https://gakkii415.github.io/ai-recipe-poc/POSTING_GUIDE/
 - JSON API: https://gakkii415.github.io/ai-recipe-poc/api/recipes.json
-- 生産ライン: [PIPELINE.md](PIPELINE.md)
 
-## 生産方式
+## フロントエンド
 
-人が1回開始すると、親が題材を5件ずつの独立タスクへ分割します。各タスクは専用ブランチへだけ書き込み、親が統合します。その後、執筆者とは別のAIが10件ずつレビューし、不合格記事だけを修正タスクへ送ります。
+v7でJekyllから次の構成へ移行しました。
 
-```text
-企画 → 5件×並列生成 → 親統合 → 機械検査 → 10件×別AIレビュー
-                                      ↓
-                              不合格だけ修正
-                                      ↓
-                                 再検査 → 公開
-```
+- Astro 5（静的サイト生成）
+- React 19
+- Tailwind CSS 4
+- shadcn CLI 4.21.0
+- shadcn/ui（new-york・Radix・neutral）
+- GitHub Actions / GitHub Pages
+
+shadcn/uiのコンポーネントは依存パッケージではなく、`src/components/ui` にソースとして置いています。デザインの正本は、共通レイアウト、UIコンポーネント、デザイントークンです。
 
 ## 投稿方式
 
-`_posts/YYYY-MM-DD-slug.md` を追加します。1記事1ファイルなので、記事ごとの差分、削除、復元、並列生成を扱えます。完全な例は `templates/recipe.md.example`、詳細は投稿仕様を参照してください。
+`_posts/YYYY-MM-DD-slug.md` を追加します。記事ファイルはAstroのContent Layerが読み込み、一覧、個別ページ、JSON APIを一括生成します。記事ごとにHTMLを編集する必要はありません。
 
-## 検証
+完全な雛形は `templates/recipe.md.example`、詳細は投稿仕様を参照してください。
+
+## 開発
 
 ```bash
-ruby scripts/validate_posts.rb
+npm install
+npm run dev
+npm run check
+npm run build
+npm run shadcn -- info
 ```
 
-push / pull request時にもGitHub Actionsで同じ検証が実行されます。AIへ書き込み権限を渡す場合は、最小権限のGitHub Appまたはfine-grained tokenを使い、認証情報をリポジトリへ保存しないでください。
+`npm run build` は型検査後、トップ、404、投稿仕様、JSON API、91件の記事詳細を含む94ページを生成します。
+
+## 検証と公開
+
+Pull Requestとmainへのpushで、記事構造検査とAstroビルドを実行します。mainの検査通過後、生成済みの `dist` をGitHub Pagesへ配信します。

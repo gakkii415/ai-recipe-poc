@@ -361,3 +361,4 @@ Yesの場合、装飾を追加する前に、構成、情報階層、コンテ�
 - Typography / color / spacing / shape direction: 和文明朝を料理名、ゴシックを操作・本文、等幅を監査情報に限定。生成紙色、墨色、トマト赤、葉色。面をカード化せず罫線で関係を示す。
 - Motion / responsive direction: 検索結果は即時更新、その他の動きは最小限。Mobileでは補助ナビとカテゴリ列を圧縮し、タッチ領域を維持する。
 - Durable design decisions: 固有表現は「編集索引の行」と「CONTENT STATUS帯」。画像の有無に依存せず100記事まで同じ視覚文法で増やせることを優先する。
+- UI implementation: Astro + React + Tailwind CSS v4。shadcn/ui v4は検索・絞り込み・状態・材料概要など操作やグルーピングが必要な箇所に限定し、一覧自体はカードグリッドではなく中〜高密度の編集索引行として実装する。
