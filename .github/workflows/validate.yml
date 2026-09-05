@@ -4,12 +4,20 @@ on:
   push:
     paths:
       - "_posts/**"
+      - "_layouts/**"
+      - "assets/**"
+      - "*.html"
+      - "POSTING_GUIDE.md"
       - "scripts/validate_posts.rb"
       - "_config.yml"
       - ".github/workflows/validate.yml"
   pull_request:
     paths:
       - "_posts/**"
+      - "_layouts/**"
+      - "assets/**"
+      - "*.html"
+      - "POSTING_GUIDE.md"
       - "scripts/validate_posts.rb"
       - "_config.yml"
       - ".github/workflows/validate.yml"

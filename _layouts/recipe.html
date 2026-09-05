@@ -1,45 +1,95 @@
 ---
 layout: default
 ---
-<main class="recipe-page">
-  <a class="back-link" href="{{ '/' | relative_url }}#recipes">← レシピ一覧</a>
+<main id="main-content" class="recipe-page">
+  <nav class="breadcrumb" aria-label="パンくずリスト">
+    <a href="{{ '/' | relative_url }}">ホーム</a>
+    <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+    <a href="{{ '/' | relative_url }}#recipes">レシピ</a>
+    <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+    <span aria-current="page">{{ page.title }}</span>
+  </nav>
 
   <article itemscope itemtype="https://schema.org/Recipe">
-    <header class="recipe-heading">
-      <div>
-        <p class="recipe-kicker">{{ page.category }} / {{ page.cuisine }}</p>
+    <header class="recipe-hero">
+      <div class="recipe-hero__copy">
+        <div class="recipe-tags">
+          <span class="badge">{{ page.category }}</span>
+          <span class="badge badge--muted">{{ page.cuisine }}</span>
+        </div>
         <h1 itemprop="name">{{ page.title }}</h1>
         <p class="recipe-lead" itemprop="description">{{ page.description }}</p>
       </div>
-      <dl class="recipe-facts">
-        <div><dt>準備</dt><dd>{{ page.prep_minutes }}分</dd></div>
-        <div><dt>加熱</dt><dd>{{ page.cook_minutes }}分</dd></div>
-        <div><dt>分量</dt><dd>{{ page.servings }}人分</dd></div>
-        <div><dt>難易度</dt><dd>{{ page.difficulty }}</dd></div>
+
+      <dl class="recipe-facts" aria-label="レシピ概要">
+        <div>
+          <dt>
+            <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+            準備
+          </dt>
+          <dd>{{ page.prep_minutes }}<small>分</small></dd>
+        </div>
+        <div>
+          <dt>
+            <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12V4a2 2 0 1 1 4 0v8a6 6 0 1 1-6.5 2.5Z"/></svg>
+            加熱
+          </dt>
+          <dd>{{ page.cook_minutes }}<small>分</small></dd>
+        </div>
+        <div>
+          <dt>
+            <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            分量
+          </dt>
+          <dd>{{ page.servings }}<small>人分</small></dd>
+        </div>
+        <div>
+          <dt>
+            <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M12 3 2 9l10 6 10-6-10-6Z"/><path d="m2 13 10 6 10-6"/></svg>
+            難易度
+          </dt>
+          <dd class="fact-text">{{ page.difficulty }}</dd>
+        </div>
       </dl>
     </header>
 
-    <div class="review-strip review-{{ page.review_status }}">
-      <span>CONTENT STATUS</span>
-      <strong>{{ page.review_status }}</strong>
-      <span>ID {{ page.content_id }}</span>
-      <span>BATCH {{ page.batch_id }}</span>
-    </div>
-
-    <div class="recipe-body">
-      <aside class="ingredients" aria-labelledby="ingredients-title">
-        <h2 id="ingredients-title">材料</h2>
-        <p>{{ page.servings }}人分</p>
+    <div class="recipe-layout">
+      <aside class="ingredients-card" aria-labelledby="ingredients-title">
+        <div class="card-heading">
+          <div>
+            <p class="section-label">INGREDIENTS</p>
+            <h2 id="ingredients-title">材料</h2>
+          </div>
+          <span>{{ page.servings }}人分</span>
+        </div>
         <ul itemprop="recipeIngredient">
           {% for ingredient in page.ingredients %}
-            <li>{{ ingredient }}</li>
+            <li><span class="ingredient-check" aria-hidden="true"></span>{{ ingredient }}</li>
           {% endfor %}
         </ul>
       </aside>
+
       <div class="method" itemprop="recipeInstructions">
         {{ content }}
       </div>
     </div>
+
+    <footer class="content-meta">
+      <div>
+        <span class="status-dot status-{{ page.review_status }}" aria-hidden="true"></span>
+        <span>内容ステータス</span>
+        <strong>{{ page.review_status }}</strong>
+      </div>
+      <div class="content-meta__ids">
+        <span>ID {{ page.content_id }}</span>
+        <span>BATCH {{ page.batch_id }}</span>
+      </div>
+    </footer>
+
+    <a class="back-button" href="{{ '/' | relative_url }}#recipes">
+      <svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>
+      レシピ一覧へ戻る
+    </a>
   </article>
 </main>
 

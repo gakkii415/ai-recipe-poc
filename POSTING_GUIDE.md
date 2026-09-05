@@ -4,7 +4,7 @@ title: AI投稿仕様
 description: AIがGitHub経由でレシピ記事を追加するための仕様。
 permalink: /POSTING_GUIDE/
 ---
-<main class="recipe-page method" markdown="1">
+<main id="main-content" class="recipe-page method" markdown="1">
 
 # AI投稿仕様
 

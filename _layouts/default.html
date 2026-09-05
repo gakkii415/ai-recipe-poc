@@ -3,29 +3,44 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#f3efe5">
+    <meta name="theme-color" content="#fafafa">
+    <meta name="color-scheme" content="light">
     <title>{% if page.title %}{{ page.title }} — {% endif %}{{ site.title }}</title>
     <meta name="description" content="{{ page.description | default: site.description | escape }}">
     <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
   </head>
   <body>
+    <a class="skip-link" href="#main-content">本文へ移動</a>
     <header class="site-header">
-      <a class="brand" href="{{ '/' | relative_url }}" aria-label="KITCHEN INDEX ホーム">
-        <span class="brand-mark" aria-hidden="true">KI</span>
-        <span>KITCHEN INDEX</span>
-      </a>
-      <nav class="site-nav" aria-label="メインナビゲーション">
-        <a href="{{ '/' | relative_url }}#recipes">レシピ</a>
-        <a href="{{ '/POSTING_GUIDE/' | relative_url }}">投稿仕様</a>
-        <a href="{{ '/api/recipes.json' | relative_url }}">JSON API</a>
-      </nav>
+      <div class="site-header__inner">
+        <a class="brand" href="{{ '/' | relative_url }}" aria-label="KITCHEN INDEX ホーム">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="19" height="19"><path d="M3 11h18M5 11a7 7 0 0 1 14 0M7 15h10M9 19h6"/><path d="M12 4V2"/></svg>
+          </span>
+          <span class="brand-name">KITCHEN <strong>INDEX</strong></span>
+        </a>
+        <nav class="site-nav" aria-label="メインナビゲーション">
+          <a href="{{ '/' | relative_url }}#recipes">レシピ</a>
+          <a href="{{ '/POSTING_GUIDE/' | relative_url }}">投稿仕様</a>
+          <a class="nav-github" href="https://github.com/gakkii415/ai-recipe-poc">
+            <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M15 3h6v6M10 14 21 3M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>
+            GitHub
+          </a>
+        </nav>
+      </div>
     </header>
 
     {{ content }}
 
     <footer class="site-footer">
-      <p>AI大量投稿の技術検証用サイト。掲載内容は公開前のレビューを前提としています。</p>
-      <p>{{ site.version }} · <a href="https://github.com/gakkii415/ai-recipe-poc">GitHub Repository ↗</a></p>
+      <div class="site-footer__brand">
+        <span class="brand-mark brand-mark--small" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="15" height="15"><path d="M3 11h18M5 11a7 7 0 0 1 14 0M7 15h10M9 19h6"/><path d="M12 4V2"/></svg>
+        </span>
+        <strong>KITCHEN INDEX</strong>
+      </div>
+      <p>AIによる大量コンテンツ投稿の技術検証サイトです。</p>
+      <p class="site-footer__meta">{{ site.version }} · 公開前レビューを前提としています</p>
     </footer>
   </body>
 </html>

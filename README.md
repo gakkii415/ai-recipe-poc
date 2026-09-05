@@ -2,7 +2,7 @@
 
 AIが大量のテキストコンテンツを、独立タスク・別AIレビュー・選択的修正を通してGitHubへ投稿できるか検証する、GitHub Pages製のレシピサイトです。現在は既存41記事と生産ラインv2の試験50記事、計91記事を収録しています。
 
-- 公開サイト: https://gakkii415.github.io/ai-recipe-poc/?v=5
+- 公開サイト: https://gakkii415.github.io/ai-recipe-poc/?v=6
 - 投稿仕様: https://gakkii415.github.io/ai-recipe-poc/POSTING_GUIDE/
 - JSON API: https://gakkii415.github.io/ai-recipe-poc/api/recipes.json
 - 生産ライン: [PIPELINE.md](PIPELINE.md)
