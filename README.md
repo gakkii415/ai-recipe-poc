@@ -2,13 +2,13 @@
 
 AIが大量のテキストコンテンツを、GitHub経由で安全に投稿・検証・公開できるか確認するレシピサイトです。現在は91記事を収録しています。
 
-- 公開サイト: https://gakkii415.github.io/ai-recipe-poc/?v=7
+- 公開サイト: https://gakkii415.github.io/ai-recipe-poc/?v=8
 - 投稿仕様: https://gakkii415.github.io/ai-recipe-poc/POSTING_GUIDE/
 - JSON API: https://gakkii415.github.io/ai-recipe-poc/api/recipes.json
 
 ## フロントエンド
 
-v7でJekyllから次の構成へ移行しました。
+v8でJekyllから次の構成へ移行しました。
 
 - Astro 5（静的サイト生成）
 - React 19
