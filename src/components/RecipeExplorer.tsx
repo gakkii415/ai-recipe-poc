@@ -113,7 +113,7 @@ export function RecipeExplorer({ recipes }: { recipes: RecipeSummary[] }) {
         <p className="result-count" role="status" aria-live="polite"><strong>{filtered.length}</strong>件{minutes > 0 ? ` · ${minutes}分以内` : ""}</p>
       </div>
       <div className="result-controls">
-        <Button type="button" variant="outline" className="saved-filter" aria-pressed={onlySaved} onClick={() => { setOnlySaved(!onlySaved); setPage(1) }}><Heart size={16} aria-hidden="true" /><span>保存済み</span></Button>
+        <Button type="button" variant="outline" className="saved-filter" aria-label="保存したレシピだけ表示" aria-pressed={onlySaved} onClick={() => { setOnlySaved(!onlySaved); setPage(1) }}><Heart size={16} aria-hidden="true" /><span>保存済み</span></Button>
         <label className="sort-control"><span className="sr-only">並び順</span><select aria-label="並び順" value={sort} onChange={(event) => { setSort(event.target.value); setPage(1) }}><option value="default">掲載順</option><option value="quick">時間が短い順</option></select></label>
       </div>
     </div>
