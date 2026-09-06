@@ -1,125 +1,61 @@
 ---
 import { getCollection, render, type CollectionEntry } from "astro:content"
 import { ArrowLeft, Clock3, Flame, Layers3, UsersRound } from "lucide-react"
-
-import { Badge } from "@/components/ui/badge"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Separator } from "@/components/ui/separator"
+import { RecipeActions } from "@/components/RecipeActions"
 import BaseLayout from "@/layouts/BaseLayout.astro"
-import { recipeSlug, sortRecipes } from "@/lib/recipes"
+import { recipeSlug, recipeUrl, sortRecipes } from "@/lib/recipes"
+import { recipeImage } from "@/lib/recipe-images"
 
 export async function getStaticPaths() {
   const recipes = sortRecipes((await getCollection("recipes")).filter((recipe) => recipe.data.published))
-  return recipes.map((recipe) => ({
-    params: { slug: recipeSlug(recipe) },
-    props: { recipe },
-  }))
+  return recipes.map((recipe) => ({ params: { slug: recipeSlug(recipe) }, props: { recipe } }))
 }
-
-interface Props {
-  recipe: CollectionEntry<"recipes">
-}
-
+interface Props { recipe: CollectionEntry<"recipes"> }
 const { recipe } = Astro.props
 const { Content } = await render(recipe)
 const base = import.meta.env.BASE_URL.replace(/\/$/, "")
+const image = recipeImage(recipe.data)
 const facts = [
-  { label: "準備", value: String(recipe.data.prep_minutes), unit: "分", icon: Clock3 },
-  { label: "加熱", value: String(recipe.data.cook_minutes), unit: "分", icon: Flame },
-  { label: "分量", value: String(recipe.data.servings), unit: "人分", icon: UsersRound },
-  { label: "難易度", value: recipe.data.difficulty, unit: "", icon: Layers3 },
+  { label: "準備", value: `${recipe.data.prep_minutes}分`, icon: Clock3 },
+  { label: "加熱", value: `${recipe.data.cook_minutes}分`, icon: Flame },
+  { label: "分量", value: `${recipe.data.servings}人分`, icon: UsersRound },
+  { label: "難易度", value: recipe.data.difficulty, icon: Layers3 },
 ]
 const schema = {
-  "@context": "https://schema.org",
-  "@type": "Recipe",
-  name: recipe.data.title,
-  description: recipe.data.description,
+  "@context": "https://schema.org", "@type": "Recipe",
+  name: recipe.data.title, description: recipe.data.description,
   datePublished: recipe.data.date.toISOString(),
-  prepTime: `PT${recipe.data.prep_minutes}M`,
-  cookTime: `PT${recipe.data.cook_minutes}M`,
-  recipeYield: `${recipe.data.servings}人分`,
-  recipeCategory: recipe.data.category,
-  recipeCuisine: recipe.data.cuisine,
-  recipeIngredient: recipe.data.ingredients,
+  prepTime: `PT${recipe.data.prep_minutes}M`, cookTime: `PT${recipe.data.cook_minutes}M`,
+  recipeYield: `${recipe.data.servings}人分`, recipeCategory: recipe.data.category,
+  recipeCuisine: recipe.data.cuisine, recipeIngredient: recipe.data.ingredients,
+  ...(!image.reference ? { image: image.src } : {}),
 }
 ---
 <BaseLayout title={recipe.data.title} description={recipe.data.description}>
-  <main id="main-content" class="mx-auto max-w-6xl px-4 py-7 sm:px-6 sm:py-9">
-    <nav class="flex min-w-0 items-center gap-2 overflow-hidden text-xs text-muted-foreground" aria-label="パンくずリスト">
-      <a href={`${base}/`} class="hover:text-foreground">ホーム</a>
-      <span>/</span>
-      <a href={`${base}/#recipes`} class="hover:text-foreground">レシピ</a>
-      <span>/</span>
-      <span class="truncate" aria-current="page">{recipe.data.title}</span>
-    </nav>
-
+  <main id="main-content" class="recipe-detail site-width">
+    <a href={`${base}/#recipes`} class="back-link"><ArrowLeft size={17} aria-hidden="true" />すべてのレシピ</a>
     <article>
-      <header class="grid gap-10 border-b py-12 lg:grid-cols-[minmax(0,1fr)_25rem] lg:items-end lg:gap-20 lg:py-16">
-        <div>
-          <div class="flex gap-2">
-            <Badge>{recipe.data.category}</Badge>
-            <Badge variant="secondary">{recipe.data.cuisine}</Badge>
-          </div>
-          <h1 class="font-serif-jp mt-5 text-4xl font-semibold leading-[1.15] tracking-[-0.045em] sm:text-5xl lg:text-6xl">{recipe.data.title}</h1>
-          <p class="mt-5 max-w-2xl text-base leading-7 text-muted-foreground">{recipe.data.description}</p>
+      <header class="recipe-intro">
+        <div class="recipe-intro-copy">
+          <p class="detail-category">{recipe.data.category} · {recipe.data.cuisine}</p>
+          <h1>{recipe.data.title}</h1>
+          <p class="detail-description">{recipe.data.description}</p>
+          <p class="detail-total"><Clock3 size={18} aria-hidden="true" />合計 <strong>{recipe.data.prep_minutes + recipe.data.cook_minutes}分</strong></p>
+          <dl class="recipe-facts">{facts.map(({ label, value, icon: Icon }) => <div><dt><Icon size={15} aria-hidden="true" />{label}</dt><dd>{value}</dd></div>)}</dl>
+          <RecipeActions url={recipeUrl(recipe)} title={recipe.data.title} client:load />
         </div>
-        <Card className="overflow-hidden py-0">
-          <dl class="grid grid-cols-2 gap-0">
-            {facts.map(({ label, value, unit, icon: Icon }, index) => (
-              <div class:list={["min-h-24 p-4", index % 2 === 0 && "border-r", index < 2 && "border-b"]}>
-                <dt class="flex items-center gap-1.5 text-xs text-muted-foreground"><Icon size={15} />{label}</dt>
-                <dd class="mt-2 text-xl font-semibold">{value}<small class="ml-1 text-xs font-normal text-muted-foreground">{unit}</small></dd>
-              </div>
-            ))}
-          </dl>
-        </Card>
+        <figure class="detail-photo"><img src={image.src} alt={image.alt} width="720" height="540" loading="eager" decoding="async" referrerpolicy="no-referrer" />{image.reference && <figcaption>イメージ · 掲載レシピの完成写真ではありません</figcaption>}</figure>
       </header>
-
-      <div class="grid gap-12 py-12 lg:grid-cols-[minmax(17rem,0.7fr)_minmax(0,1.3fr)] lg:gap-24 lg:py-16">
-        <aside>
-          <Card className="gap-0 overflow-hidden py-0 lg:sticky lg:top-24">
-            <CardHeader className="flex-row items-end justify-between border-b p-5">
-              <div>
-                <p class="text-[11px] font-semibold tracking-[0.16em] text-primary">INGREDIENTS</p>
-                <CardTitle className="font-serif-jp mt-2 text-2xl">材料</CardTitle>
-              </div>
-              <span class="text-xs text-muted-foreground">{recipe.data.servings}人分</span>
-            </CardHeader>
-            <CardContent className="p-2">
-              <ul class="divide-y">
-                {recipe.data.ingredients.map((ingredient) => (
-                  <li class="flex items-start gap-3 px-3 py-3 text-sm">
-                    <span class="mt-0.5 size-4 shrink-0 rounded border border-input"></span>
-                    {ingredient}
-                  </li>
-                ))}
-              </ul>
-            </CardContent>
-          </Card>
+      <div class="recipe-reading-layout">
+        <aside id="ingredients" class="ingredients-panel">
+          <div class="ingredients-heading"><h2>材料</h2><span>{recipe.data.servings}人分</span></div>
+          <ul class="ingredient-list">{recipe.data.ingredients.map((ingredient) => <li><label><input type="checkbox" /><span>{ingredient}</span></label></li>)}</ul>
         </aside>
-
-        <div class="recipe-prose">
-          <Content />
-        </div>
+        <div id="method" class="recipe-prose"><Content /></div>
       </div>
-
-      <Separator />
-      <footer class="flex flex-col gap-3 bg-foreground px-4 py-3 font-mono text-[11px] text-background/65 sm:flex-row sm:items-center sm:justify-between">
-        <div class="flex items-center gap-2">
-          <span class:list={["size-1.5 rounded-full", recipe.data.review_status === "reviewed" ? "bg-emerald-600" : "bg-muted-foreground"]}></span>
-          CONTENT STATUS <strong class="text-background">{recipe.data.review_status}</strong>
-        </div>
-        <div class="flex flex-wrap gap-4">
-          <span>ID {recipe.data.content_id}</span>
-          <span>BATCH {recipe.data.batch_id}</span>
-        </div>
-      </footer>
-
-      <a href={`${base}/#recipes`} class="mt-2 inline-flex h-9 items-center gap-2 rounded-md border bg-background px-3 text-sm font-medium shadow-xs hover:bg-accent">
-        <ArrowLeft size={16} /> レシピ一覧へ戻る
-      </a>
+      <details class="recipe-audit"><summary>レシピの生成情報</summary><dl><div><dt>確認状況</dt><dd>{recipe.data.review_status}</dd></div><div><dt>記事ID</dt><dd>{recipe.data.content_id}</dd></div><div><dt>バッチ</dt><dd>{recipe.data.batch_id}</dd></div></dl></details>
     </article>
+    <nav class="cooking-nav" aria-label="調理中のショートカット"><a href="#ingredients">材料を見る</a><a href="#method">作り方を見る</a></nav>
   </main>
-
-  <script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(schema).replace(/</g, "\\u003c")} />
 </BaseLayout>
