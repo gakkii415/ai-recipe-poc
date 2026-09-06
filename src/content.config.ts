@@ -22,8 +22,9 @@ const recipes = defineCollection({
     batch_id: z.string(),
     review_status: z.string(),
     published: z.boolean(),
+    image: z.string().regex(/^(https:\/\/|\/(?!\/))/).optional(),
+    image_alt: z.string().optional(),
   }),
 })
 
 export const collections = { recipes }
-
