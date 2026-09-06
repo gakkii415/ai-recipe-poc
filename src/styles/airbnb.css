@@ -65,7 +65,7 @@ button:not(:disabled), select, summary { cursor: pointer; }
 .save-button:hover { background: #fff; }
 .save-button[aria-pressed="true"] { color: var(--brand); }
 .time-badge { position: absolute; top: 12px; left: 12px; max-width: calc(100% - 70px); padding: 5px 10px; border-radius: 999px; background: #fff; color: #222; font-size: 11px; font-weight: 600; line-height: 1.4; }
-.reference-label { position: absolute; bottom: 9px; left: 9px; padding: 2px 6px; border-radius: 4px; background: #222b; color: #fff; font-size: 10px; line-height: 1.6; pointer-events: none; }
+.reference-label { position: absolute; bottom: 9px; left: 9px; padding: 2px 6px; border-radius: 4px; background: #222b; color: #fff; font-size: 11px; line-height: 1.6; pointer-events: none; }
 .recipe-card-title { display: block; margin-top: 11px; border-radius: 3px; }
 .recipe-card-title h3 { font-size: 14px; line-height: 1.5; font-weight: 600; margin: 0; overflow-wrap: anywhere; }
 .recipe-card-title:hover { text-decoration: underline; text-underline-offset: 3px; }
@@ -103,7 +103,7 @@ button:not(:disabled), select, summary { cursor: pointer; }
 .recipe-actions button { min-height: 44px; border-radius: 8px; box-shadow: none; }
 .detail-photo { margin: 0; min-width: 0; }
 .detail-photo img { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 14px; background: #f7f7f7; }
-.detail-photo figcaption { font-size: 10px; color: #6a6a6a; margin-top: 8px; text-align: right; }
+.detail-photo figcaption { font-size: 11px; color: #6a6a6a; margin-top: 8px; text-align: right; }
 .recipe-reading-layout { display: grid; grid-template-columns: minmax(230px, .75fr) minmax(0, 1.3fr); gap: 64px; align-items: start; padding-block: 40px; }
 .ingredients-panel { position: sticky; top: 108px; border: 1px solid #ddd; border-radius: 14px; padding: 24px; scroll-margin-top: 104px; }
 .ingredients-heading { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-bottom: 16px; }
@@ -160,10 +160,10 @@ button:not(:disabled), select, summary { cursor: pointer; }
   .time-badge { top: 9px; left: 9px; padding: 4px 7px; font-size: 10px; max-width: calc(100% - 57px); }
   .save-button { top: 3px; right: 3px; }
   .photo-link { border-radius: 12px; }
-  .reference-label { bottom: 7px; left: 7px; font-size: 9px; }
+  .reference-label { bottom: 7px; left: 7px; font-size: 10px; }
   .recipe-duration { font-size: 12px; }
   .recipe-pagination { margin-top: 32px; }
-  .image-disclaimer { line-height: 1.7; font-size: 10px; }
+  .image-disclaimer { line-height: 1.7; font-size: 11px; }
   .footer-inner { align-items: flex-start; flex-direction: column; gap: 14px; padding-block: 24px; }
   .footer-inner nav { gap: 24px; }
   .recipe-detail { padding-top: 12px; padding-bottom: 92px; }
@@ -180,5 +180,5 @@ button:not(:disabled), select, summary { cursor: pointer; }
   .cooking-nav a { display: grid; place-items: center; min-height: 44px; border: 1px solid #222; border-radius: 8px; font-size: 13px; font-weight: 600; }
   .cooking-nav a:last-child { background: #222; color: #fff; }
 }
-@media (max-width: 360px) { .site-width { padding-inline: 16px; } .search-time { padding-left: 8px; } .search-capsule { grid-template-columns: minmax(0,1fr) 94px 42px; } .recipe-grid { gap: 24px 12px; } .time-badge { display: none; } .result-toolbar h2 { font-size: 17px; } }
-@media print { .site-header, .site-footer, .back-link, .recipe-actions, .cooking-nav, .detail-photo, .recipe-audit { display: none !important; } .recipe-intro { display: block; padding: 0 0 20px; } .recipe-reading-layout { display: block; } .ingredients-panel { position: static; border: 0; padding: 0 0 24px; } .recipe-prose { font-size: 12pt; } }
+@media (max-width: 360px) { .site-width { padding-inline: 16px; } .category-strip { margin-right: -16px; padding-right: 16px; } .search-time { padding-left: 8px; } .search-capsule { grid-template-columns: minmax(0,1fr) 94px 42px; } .recipe-grid { gap: 24px 12px; } .time-badge { display: none; } .result-toolbar h2 { font-size: 17px; } }
+@media print { .site-header, .site-footer, .back-link, .recipe-actions, .cooking-nav, .detail-photo, .recipe-audit { display: none !important; } .recipe-intro { display: block !important; padding: 0 0 20px; } .recipe-reading-layout { display: block; } .ingredients-panel { position: static; border: 0; padding: 0 0 24px; } .recipe-prose { font-size: 12pt; } }

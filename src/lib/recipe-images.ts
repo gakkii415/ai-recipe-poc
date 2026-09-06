@@ -1,5 +1,5 @@
-// Reference photography is explicitly labelled: it is not a photograph of the recipe.
-// Real recipe photos can be supplied through optional front matter without editing a template.
+// Reference photographs are not photographs of the specific recipe.
+// Optional image/image_alt front matter takes priority over these fallbacks.
 export type RecipeImage = { src: string; alt: string; reference: boolean }
 type ImageInput = { title: string; category: string; image?: string; image_alt?: string }
 const photos = {
@@ -7,7 +7,10 @@ const photos = {
   pasta: "photo-1473093295043-cdd812d0e601",
   fish: "photo-1467003909585-2f8a72700288",
   soup: "photo-1547592166-23ac45744acd",
-  rice: "photo-1511690743698-d9d85f2fbf38",
+  // Tadahiro Higuchi: https://unsplash.com/photos/yKOHJmQP8-A
+  rice: "photo-1754292148609-0d0a33282ff9",
+  // Ella Olsson: https://unsplash.com/photos/4dQiaWKiL-Y
+  sweetPotato: "photo-1543352634-99a5d50ae78e",
   meat: "photo-1544025162-d76694265947",
   chicken: "photo-1532550907401-a500c9a57435",
   pancakes: "photo-1506084868230-bb9d95c24759",
@@ -26,14 +29,15 @@ export function recipeImage(data: ImageInput): RecipeImage {
   }
   const title = data.title
   let key: keyof typeof photos = "salad"
-  if (/パンケーキ|ホットケーキ/.test(title)) key = "pancakes"
+  if (/さつまいも|さつま芋|サツマイモ/.test(title)) key = "sweetPotato"
+  else if (/パンケーキ|ホットケーキ/.test(title)) key = "pancakes"
   else if (/トースト|サンド|パン/.test(title)) key = "toast"
   else if (/プリン|ヨーグルト|ゼリー|ケーキ|クランブル|オーツ|甘味|おやつ|デザート/.test(title + data.category)) key = "dessert"
   else if (/パスタ|スパゲ|ペンネ|マカロニ/.test(title)) key = "pasta"
   else if (/うどん|そば|そうめん|にゅうめん|麺|ヌードル/.test(title)) key = "noodles"
   else if (/カレー/.test(title)) key = "curry"
   else if (/スープ|汁|ポタージュ/.test(title + data.category)) key = "soup"
-  else if (/ご飯|ごはん|丼|おにぎり|リゾット|ピラフ|炒飯|チャーハン|炊き込み/.test(title)) key = "rice"
+  else if (/ご飯|ごはん|丼|おにぎり|リゾット|ピラフ|炒飯|チャーハン|炊き込み|粥|かゆ/.test(title)) key = "rice"
   else if (/鮭|さけ|サーモン|さば|サバ|鯖|たら|タラ|魚|えび|エビ|ぶり|ブリ/.test(title)) key = "fish"
   else if (/鶏|チキン|ささみ|手羽/.test(title)) key = "chicken"
   else if (/牛|豚|肉|ハンバーグ/.test(title)) key = "meat"
